@@ -1,7 +1,14 @@
+//
+//  RayGolfWidget.swift
+//  RayGolfWidget
+//
+
 import WidgetKit
 import SwiftUI
 
-// Widget accesses UserDefaults directly (same keys as ActiveRoundStore)
+// Use same App Group as main app so widget and app share active round data
+private let widgetDefaults: UserDefaults? = UserDefaults(suiteName: "group.com.raygolf.app")
+
 private enum WidgetKeys {
     static let courseName = "raygolf.activeRound.courseName"
     static let isNineHole = "raygolf.activeRound.isNineHole"
@@ -10,7 +17,7 @@ private enum WidgetKeys {
 
 struct RayGolfWidget: Widget {
     let kind: String = "RayGolfWidget"
-    
+
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: RayGolfTimelineProvider()) { entry in
             RayGolfWidgetView(entry: entry)
@@ -26,9 +33,9 @@ struct RayGolfTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> RayGolfEntry {
         RayGolfEntry(date: Date(), courseName: "Pebble Beach", currentHole: 3, isNineHole: false)
     }
-    
-    func getSnapshot(in context: Context, completion: @escaping (RayGolfEntry) -> ()) {
-        let def = UserDefaults.standard
+
+    func getSnapshot(in context: Context, completion: @escaping (RayGolfEntry) -> Void) {
+        let def = widgetDefaults ?? UserDefaults.standard
         let entry = RayGolfEntry(
             date: Date(),
             courseName: def.string(forKey: WidgetKeys.courseName) ?? "",
@@ -37,9 +44,9 @@ struct RayGolfTimelineProvider: TimelineProvider {
         )
         completion(entry)
     }
-    
-    func getTimeline(in context: Context, completion: @escaping (Timeline<RayGolfEntry>) -> ()) {
-        let def = UserDefaults.standard
+
+    func getTimeline(in context: Context, completion: @escaping (Timeline<RayGolfEntry>) -> Void) {
+        let def = widgetDefaults ?? UserDefaults.standard
         let entry = RayGolfEntry(
             date: Date(),
             courseName: def.string(forKey: WidgetKeys.courseName) ?? "",
@@ -61,7 +68,7 @@ struct RayGolfEntry: TimelineEntry {
 struct RayGolfWidgetView: View {
     var entry: RayGolfEntry
     @Environment(\.widgetFamily) var family
-    
+
     var body: some View {
         switch family {
         case .accessoryRectangular:
@@ -69,14 +76,14 @@ struct RayGolfWidgetView: View {
         case .accessoryInline:
             InlineView(entry: entry)
         default:
-            Text("Unsupported")
+            Text("RayGolf")
         }
     }
 }
 
 struct RectangularView: View {
     var entry: RayGolfEntry
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             if entry.currentHole > 0 && entry.currentHole <= (entry.isNineHole ? 9 : 18) {
@@ -87,10 +94,10 @@ struct RectangularView: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
-                
+
                 HStack(spacing: 4) {
                     ForEach(1...8, id: \.self) { score in
-                        Button(intent: RecordScoreIntent(score: score)) {
+                        Button(intent: RecordScoreIntent(score: IntentParameter(score))) {
                             Text("\(score)")
                                 .font(.caption)
                                 .fontWeight(.semibold)
@@ -114,7 +121,7 @@ struct RectangularView: View {
 
 struct InlineView: View {
     var entry: RayGolfEntry
-    
+
     var body: some View {
         if entry.currentHole > 0 && entry.currentHole <= (entry.isNineHole ? 9 : 18) {
             Label("Hole \(entry.currentHole)", systemImage: "figure.golf")

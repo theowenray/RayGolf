@@ -1,10 +1,24 @@
 import Foundation
 import Combine
 
+/// App Group ID — must match the capability added to both RayGolf and RayGolfWidgetExtension targets in Xcode.
+let kRayGolfAppGroupID = "group.com.raygolf.app"
+
 /// Manages the current round in progress (for Lock Screen widget).
-/// Stored in UserDefaults with App Group support for widget access.
+/// Uses App Group UserDefaults when available so the widget can read/write the same data.
 final class ActiveRoundStore: ObservableObject {
     static let shared = ActiveRoundStore()
+    
+    private let defaults: UserDefaults
+    private init() {
+        let def = UserDefaults(suiteName: kRayGolfAppGroupID) ?? UserDefaults.standard
+        defaults = def
+        courseName = def.string(forKey: Keys.courseName) ?? ""
+        isNineHole = def.bool(forKey: Keys.isNineHole)
+        currentHole = def.integer(forKey: Keys.currentHole)
+        holeScores = (def.array(forKey: Keys.holeScores) as? [Int]) ?? []
+        date = def.object(forKey: Keys.date) as? Date ?? Date()
+    }
     
     private enum Keys {
         static let courseName = "raygolf.activeRound.courseName"
@@ -45,15 +59,6 @@ final class ActiveRoundStore: ObservableObject {
     
     var totalScore: Int {
         holeScores.reduce(0, +)
-    }
-    
-    init() {
-        let def = UserDefaults.standard
-        courseName = def.string(forKey: Keys.courseName) ?? ""
-        isNineHole = def.bool(forKey: Keys.isNineHole)
-        currentHole = def.integer(forKey: Keys.currentHole)
-        holeScores = (def.array(forKey: Keys.holeScores) as? [Int]) ?? []
-        date = def.object(forKey: Keys.date) as? Date ?? Date()
     }
     
     func startRound(courseName: String, isNineHole: Bool) {
@@ -105,11 +110,10 @@ final class ActiveRoundStore: ObservableObject {
     }
     
     private func save() {
-        let def = UserDefaults.standard
-        def.set(courseName, forKey: Keys.courseName)
-        def.set(isNineHole, forKey: Keys.isNineHole)
-        def.set(currentHole, forKey: Keys.currentHole)
-        def.set(holeScores, forKey: Keys.holeScores)
-        def.set(date, forKey: Keys.date)
+        defaults.set(courseName, forKey: Keys.courseName)
+        defaults.set(isNineHole, forKey: Keys.isNineHole)
+        defaults.set(currentHole, forKey: Keys.currentHole)
+        defaults.set(holeScores, forKey: Keys.holeScores)
+        defaults.set(date, forKey: Keys.date)
     }
 }

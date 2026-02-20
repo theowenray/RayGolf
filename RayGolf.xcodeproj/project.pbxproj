@@ -3,17 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		496D97C62F48F6E700552654 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496D97C52F48F6E700552654 /* WidgetKit.framework */; };
+		496D97C82F48F6E700552654 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496D97C72F48F6E700552654 /* SwiftUI.framework */; };
+		496D97D92F48F6E800552654 /* RayGolfWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 496D97C32F48F6E700552654 /* RayGolfWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A10000012345678900000001 /* RayGolfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000012345678900000002 /* RayGolfApp.swift */; };
 		A10000012345678900000003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000012345678900000004 /* ContentView.swift */; };
 		A10000012345678900000005 /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000012345678900000006 /* Round.swift */; };
 		A10000012345678900000007 /* HandicapCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000012345678900000008 /* HandicapCalculator.swift */; };
 		A10000012345678900000009 /* StatisticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001234567890000000A /* StatisticsService.swift */; };
 		A1000001234567890000000B /* GoalsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001234567890000000C /* GoalsStore.swift */; };
-		A1000001234567890000001F /* ActiveRoundStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000012345678900000040 /* ActiveRoundStore.swift */; };
 		A1000001234567890000000D /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001234567890000000E /* DashboardView.swift */; };
 		A1000001234567890000000F /* ProgressRingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000012345678900000010 /* ProgressRingsView.swift */; };
 		A10000012345678900000011 /* MetricsCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000012345678900000012 /* MetricsCardsView.swift */; };
@@ -23,9 +25,39 @@
 		A10000012345678900000019 /* AddRoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001234567890000001A /* AddRoundView.swift */; };
 		A1000001234567890000001B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001234567890000001C /* SettingsView.swift */; };
 		A1000001234567890000001D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000001234567890000001E /* Assets.xcassets */; };
+		A1000001234567890000001F /* ActiveRoundStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000012345678900000040 /* ActiveRoundStore.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		496D97D72F48F6E800552654 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1000001234567890000002E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 496D97C22F48F6E700552654;
+			remoteInfo = RayGolfWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		496D97DA2F48F6E800552654 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				496D97D92F48F6E800552654 /* RayGolfWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		496D97C32F48F6E700552654 /* RayGolfWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RayGolfWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		496D97C52F48F6E700552654 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		496D97C72F48F6E700552654 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		496D97ED2F48F88300552654 /* RayGolf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RayGolf.entitlements; sourceTree = "<group>"; };
+		496D97EE2F48F8A500552654 /* RayGolfWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RayGolfWidgetExtension.entitlements; sourceTree = "<group>"; };
 		A10000012345678900000000 /* RayGolf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RayGolf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10000012345678900000002 /* RayGolfApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RayGolfApp.swift; sourceTree = "<group>"; };
 		A10000012345678900000004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,7 +65,6 @@
 		A10000012345678900000008 /* HandicapCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandicapCalculator.swift; sourceTree = "<group>"; };
 		A1000001234567890000000A /* StatisticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsService.swift; sourceTree = "<group>"; };
 		A1000001234567890000000C /* GoalsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsStore.swift; sourceTree = "<group>"; };
-		A10000012345678900000040 /* ActiveRoundStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRoundStore.swift; sourceTree = "<group>"; };
 		A1000001234567890000000E /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		A10000012345678900000010 /* ProgressRingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingsView.swift; sourceTree = "<group>"; };
 		A10000012345678900000012 /* MetricsCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsCardsView.swift; sourceTree = "<group>"; };
@@ -43,9 +74,33 @@
 		A1000001234567890000001A /* AddRoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoundView.swift; sourceTree = "<group>"; };
 		A1000001234567890000001C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A1000001234567890000001E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A10000012345678900000040 /* ActiveRoundStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRoundStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		496D97DD2F48F6E800552654 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 496D97C22F48F6E700552654 /* RayGolfWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		496D97C92F48F6E700552654 /* RayGolfWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (496D97DD2F48F6E800552654 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = RayGolfWidget; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		496D97C02F48F6E700552654 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				496D97C82F48F6E700552654 /* SwiftUI.framework in Frameworks */,
+				496D97C62F48F6E700552654 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A10000012345678900000020 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,9 +111,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		496D97C42F48F6E700552654 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				496D97C52F48F6E700552654 /* WidgetKit.framework */,
+				496D97C72F48F6E700552654 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A10000012345678900000021 /* RayGolf */ = {
 			isa = PBXGroup;
 			children = (
+				496D97ED2F48F88300552654 /* RayGolf.entitlements */,
 				A10000012345678900000002 /* RayGolfApp.swift */,
 				A10000012345678900000004 /* ContentView.swift */,
 				A10000012345678900000022 /* Models */,
@@ -131,14 +196,18 @@
 			isa = PBXGroup;
 			children = (
 				A10000012345678900000000 /* RayGolf.app */,
+				496D97C32F48F6E700552654 /* RayGolfWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A10000012345678900000029 /* Main */ = {
+		A10000012345678900000029 = {
 			isa = PBXGroup;
 			children = (
+				496D97EE2F48F8A500552654 /* RayGolfWidgetExtension.entitlements */,
 				A10000012345678900000021 /* RayGolf */,
+				496D97C92F48F6E700552654 /* RayGolfWidget */,
+				496D97C42F48F6E700552654 /* Frameworks */,
 				A10000012345678900000028 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -146,6 +215,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		496D97C22F48F6E700552654 /* RayGolfWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 496D97DE2F48F6E800552654 /* Build configuration list for PBXNativeTarget "RayGolfWidgetExtension" */;
+			buildPhases = (
+				496D97BF2F48F6E700552654 /* Sources */,
+				496D97C02F48F6E700552654 /* Frameworks */,
+				496D97C12F48F6E700552654 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				496D97C92F48F6E700552654 /* RayGolfWidget */,
+			);
+			name = RayGolfWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = RayGolfWidgetExtension;
+			productReference = 496D97C32F48F6E700552654 /* RayGolfWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		A1000001234567890000002A /* RayGolf */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1000001234567890000002B /* Build configuration list for PBXNativeTarget "RayGolf" */;
@@ -153,10 +244,12 @@
 				A1000001234567890000002C /* Sources */,
 				A10000012345678900000020 /* Frameworks */,
 				A1000001234567890000002D /* Resources */,
+				496D97DA2F48F6E800552654 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				496D97D82F48F6E800552654 /* PBXTargetDependency */,
 			);
 			name = RayGolf;
 			productName = RayGolf;
@@ -170,8 +263,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					496D97C22F48F6E700552654 = {
+						CreatedOnToolsVersion = 26.1;
+					};
+				};
 			};
 			buildConfigurationList = A1000001234567890000002F /* Build configuration list for PBXProject "RayGolf" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -187,11 +285,19 @@
 			projectRoot = "";
 			targets = (
 				A1000001234567890000002A /* RayGolf */,
+				496D97C22F48F6E700552654 /* RayGolfWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		496D97C12F48F6E700552654 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1000001234567890000002D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -203,6 +309,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		496D97BF2F48F6E700552654 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1000001234567890000002C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -227,7 +340,81 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		496D97D82F48F6E800552654 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 496D97C22F48F6E700552654 /* RayGolfWidgetExtension */;
+			targetProxy = 496D97D72F48F6E800552654 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		496D97DB2F48F6E800552654 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RayGolfWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RayGolfWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RayGolfWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raygolf.app.RayGolfWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		496D97DC2F48F6E800552654 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RayGolfWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RayGolfWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RayGolfWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raygolf.app.RayGolfWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A10000012345678900000030 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -350,8 +537,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RayGolf/RayGolf.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -378,8 +567,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RayGolf/RayGolf.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -404,6 +595,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		496D97DE2F48F6E800552654 /* Build configuration list for PBXNativeTarget "RayGolfWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				496D97DB2F48F6E800552654 /* Debug */,
+				496D97DC2F48F6E800552654 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A1000001234567890000002B /* Build configuration list for PBXNativeTarget "RayGolf" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

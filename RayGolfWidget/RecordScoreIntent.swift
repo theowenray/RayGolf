@@ -10,8 +10,8 @@ struct RecordScoreIntent: AppIntent {
     var score: Int
     
     func perform() async throws -> some IntentResult {
-        // Access UserDefaults directly (same keys as ActiveRoundStore)
-        let def = UserDefaults.standard
+        // Use same App Group as main app so widget and app share data
+        let def = UserDefaults(suiteName: "group.com.raygolf.app") ?? UserDefaults.standard
         let currentHole = def.integer(forKey: "raygolf.activeRound.currentHole")
         let isNineHole = def.bool(forKey: "raygolf.activeRound.isNineHole")
         let maxHoles = isNineHole ? 9 : 18
