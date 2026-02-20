@@ -3,6 +3,8 @@ import SwiftData
 
 struct TrendChartView: View {
     let rounds: [Round]
+    /// When true, score mode uses 18-hole equivalent scores; when false, uses as-played totals.
+    let use18HoleEquivalentScores: Bool
     @State private var showHandicap = false
     
     private var sortedRounds: [Round] {
@@ -19,8 +21,11 @@ struct TrendChartView: View {
                 return (r.date, h)
             }
         } else {
-            // Show the actual score shot for that round (9- or 18-hole), not 18-hole equivalent.
-            return sorted.map { (date: $0.date, value: Double($0.totalScore)) }
+            // Score mode: either as-played totals or 18-hole equivalents, controlled by dashboard toggle.
+            return sorted.map {
+                let value = use18HoleEquivalentScores ? $0.effectiveScore : $0.totalScore
+                return (date: $0.date, value: Double(value))
+            }
         }
     }
     
@@ -110,6 +115,6 @@ struct SimpleLineChart: View {
 }
 
 #Preview {
-    TrendChartView(rounds: [])
+    TrendChartView(rounds: [], use18HoleEquivalentScores: false)
         .padding()
 }

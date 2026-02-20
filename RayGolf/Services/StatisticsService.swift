@@ -14,10 +14,17 @@ struct StatisticsService {
         return rounds.filter { $0.date >= thirtyDaysAgo }.count
     }
     
-    /// Scoring average of last N rounds (raw total scores: 9- or 18-hole as played)
-    static func scoringAverage(from rounds: [Round], count: Int = 5) -> Double? {
+    /// Scoring average of last N rounds.
+    /// - Parameters:
+    ///   - normalizeTo18: when true, uses 18-hole equivalent scores so 9-hole rounds are doubled.
+    static func scoringAverage(from rounds: [Round], count: Int = 5, normalizeTo18: Bool = false) -> Double? {
         let sorted = rounds.sorted { $0.date > $1.date }
-        let recent = Array(sorted.prefix(count)).map(\.totalScore)
+        let recent: [Int]
+        if normalizeTo18 {
+            recent = Array(sorted.prefix(count)).map(\.effectiveScore)
+        } else {
+            recent = Array(sorted.prefix(count)).map(\.totalScore)
+        }
         guard !recent.isEmpty else { return nil }
         return Double(recent.reduce(0, +)) / Double(recent.count)
     }

@@ -5,6 +5,7 @@ struct DashboardView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Round.date, order: .reverse) private var rounds: [Round]
     @ObservedObject private var goals = GoalsStore.shared
+    @State private var use18HoleEquivalentScores = false
     
     private var playProgress: Double {
         let current = StatisticsService.roundsThisWeek(from: rounds)
@@ -42,16 +43,30 @@ struct DashboardView: View {
                     }
                     .padding(.vertical, 8)
                     
+                    // Score mode toggle
+                    HStack {
+                        Text("Scores")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        Picker("", selection: $use18HoleEquivalentScores) {
+                            Text("As Played").tag(false)
+                            Text("18-hole Eq.").tag(true)
+                        }
+                        .pickerStyle(.segmented)
+                        .frame(width: 200)
+                    }
+                    
                     // Metrics
                     MetricsCardsView(
                         estimatedHandicap: HandicapCalculator.estimatedHandicap(from: rounds.map(\.effectiveScore)),
-                        scoringAverage: StatisticsService.scoringAverage(from: rounds, count: 5),
+                        scoringAverage: StatisticsService.scoringAverage(from: rounds, count: 5, normalizeTo18: use18HoleEquivalentScores),
                         bestRound: StatisticsService.bestRoundLast90Days(from: rounds),
                         trend: StatisticsService.trend(from: rounds)
                     )
                     
                     // Trend chart
-                    TrendChartView(rounds: rounds)
+                    TrendChartView(rounds: rounds, use18HoleEquivalentScores: use18HoleEquivalentScores)
                     
                     // Streak
                     StreakView(weeksPlayedInRow: StatisticsService.weeksPlayedInRow(from: rounds))
