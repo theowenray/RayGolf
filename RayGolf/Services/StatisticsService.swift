@@ -15,25 +15,35 @@ struct StatisticsService {
     }
     
     /// Scoring average of last N rounds.
-    /// - Parameters:
-    ///   - normalizeTo18: when true, uses 18-hole equivalent scores so 9-hole rounds are doubled.
-    static func scoringAverage(from rounds: [Round], count: Int = 5, normalizeTo18: Bool = false) -> Double? {
+    /// - Parameter use18HoleEquivalent: when true, normalizes to 18 holes; when false, normalizes to 9 holes.
+    static func scoringAverage(from rounds: [Round], count: Int = 5, use18HoleEquivalent: Bool = false) -> Double? {
         let sorted = rounds.sorted { $0.date > $1.date }
-        let recent: [Int]
-        if normalizeTo18 {
-            recent = Array(sorted.prefix(count)).map(\.effectiveScore)
+        let recent: [Double]
+        if use18HoleEquivalent {
+            recent = Array(sorted.prefix(count)).map { Double($0.effectiveScore) }
         } else {
-            recent = Array(sorted.prefix(count)).map(\.totalScore)
+            recent = Array(sorted.prefix(count)).map { $0.nineHoleEquivalentScore }
         }
         guard !recent.isEmpty else { return nil }
-        return Double(recent.reduce(0, +)) / Double(recent.count)
+        return recent.reduce(0, +) / Double(recent.count)
     }
     
-    /// Best round (lowest raw total score) in last 90 days
-    static func bestRoundLast90Days(from rounds: [Round]) -> Int? {
+    /// Best round in last 90 days.
+    /// - Parameter use18HoleEquivalent: when true, normalizes to 18 holes; when false, normalizes to 9 holes.
+    static func bestRoundLast90Days(from rounds: [Round], use18HoleEquivalent: Bool = false) -> Int? {
         let ninetyDaysAgo = Calendar.current.date(byAdding: .day, value: -90, to: Date()) ?? Date()
-        let recent = rounds.filter { $0.date >= ninetyDaysAgo }.map(\.totalScore)
-        return recent.min()
+        let recent: [Double]
+        if use18HoleEquivalent {
+            recent = rounds
+                .filter { $0.date >= ninetyDaysAgo }
+                .map { Double($0.effectiveScore) }
+        } else {
+            recent = rounds
+                .filter { $0.date >= ninetyDaysAgo }
+                .map { $0.nineHoleEquivalentScore }
+        }
+        guard let minValue = recent.min() else { return nil }
+        return Int(minValue.rounded())
     }
     
     /// Trend: Improving / Flat / Worsening based on last 5 vs previous 5

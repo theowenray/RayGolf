@@ -5,7 +5,7 @@ struct DashboardView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Round.date, order: .reverse) private var rounds: [Round]
     @ObservedObject private var goals = GoalsStore.shared
-    @State private var use18HoleEquivalentScores = false
+    @State private var use18HoleEquivalent = false
     
     private var playProgress: Double {
         let current = StatisticsService.roundsThisWeek(from: rounds)
@@ -49,9 +49,9 @@ struct DashboardView: View {
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                         Spacer()
-                        Picker("", selection: $use18HoleEquivalentScores) {
-                            Text("As Played").tag(false)
-                            Text("18-hole Eq.").tag(true)
+                        Picker("", selection: $use18HoleEquivalent) {
+                            Text("9 Holes").tag(false)
+                            Text("18 Holes").tag(true)
                         }
                         .pickerStyle(.segmented)
                         .frame(width: 200)
@@ -59,21 +59,19 @@ struct DashboardView: View {
                     
                     // Metrics
                     MetricsCardsView(
-                        estimatedHandicap: HandicapCalculator.estimatedHandicap(from: rounds.map(\.effectiveScore)),
-                        scoringAverage: StatisticsService.scoringAverage(from: rounds, count: 5, normalizeTo18: use18HoleEquivalentScores),
-                        bestRound: StatisticsService.bestRoundLast90Days(from: rounds),
-                        trend: StatisticsService.trend(from: rounds)
+                        scoringAverage: StatisticsService.scoringAverage(from: rounds, count: 5, use18HoleEquivalent: use18HoleEquivalent),
+                        bestRound: StatisticsService.bestRoundLast90Days(from: rounds, use18HoleEquivalent: use18HoleEquivalent)
                     )
                     
                     // Trend chart
-                    TrendChartView(rounds: rounds, use18HoleEquivalentScores: use18HoleEquivalentScores)
+                    TrendChartView(rounds: rounds, use18HoleEquivalent: use18HoleEquivalent)
                     
                     // Streak
                     StreakView(weeksPlayedInRow: StatisticsService.weeksPlayedInRow(from: rounds))
                 }
                 .padding()
             }
-            .navigationTitle("Dashboard")
+            .navigationTitle("RayGolf")
             .background(Color(.systemGroupedBackground))
         }
     }

@@ -43,4 +43,14 @@ final class Round {
         }
         return isNineHole ? baseTotal * 2 : baseTotal
     }
+    
+    /// Score normalized to 9 holes (used for scoring averages when mixing 9 and 18).
+    /// 9-hole rounds use their total; 18-hole rounds are divided by 2.
+    var nineHoleEquivalentScore: Double {
+        if isNineHole {
+            return Double(totalScore)
+        } else {
+            return Double(totalScore) / 2.0
+        }
+    }
 }
