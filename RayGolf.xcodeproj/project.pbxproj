@@ -13,6 +13,7 @@
 		A10000012345678900000007 /* HandicapCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000012345678900000008 /* HandicapCalculator.swift */; };
 		A10000012345678900000009 /* StatisticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001234567890000000A /* StatisticsService.swift */; };
 		A1000001234567890000000B /* GoalsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001234567890000000C /* GoalsStore.swift */; };
+		A1000001234567890000001F /* ActiveRoundStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000012345678900000020 /* ActiveRoundStore.swift */; };
 		A1000001234567890000000D /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001234567890000000E /* DashboardView.swift */; };
 		A1000001234567890000000F /* ProgressRingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000012345678900000010 /* ProgressRingsView.swift */; };
 		A10000012345678900000011 /* MetricsCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000012345678900000012 /* MetricsCardsView.swift */; };
@@ -32,6 +33,7 @@
 		A10000012345678900000008 /* HandicapCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandicapCalculator.swift; sourceTree = "<group>"; };
 		A1000001234567890000000A /* StatisticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsService.swift; sourceTree = "<group>"; };
 		A1000001234567890000000C /* GoalsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsStore.swift; sourceTree = "<group>"; };
+		A10000012345678900000020 /* ActiveRoundStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRoundStore.swift; sourceTree = "<group>"; };
 		A1000001234567890000000E /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		A10000012345678900000010 /* ProgressRingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingsView.swift; sourceTree = "<group>"; };
 		A10000012345678900000012 /* MetricsCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsCardsView.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				A10000012345678900000008 /* HandicapCalculator.swift */,
 				A1000001234567890000000A /* StatisticsService.swift */,
 				A1000001234567890000000C /* GoalsStore.swift */,
+				A10000012345678900000020 /* ActiveRoundStore.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				A10000012345678900000007 /* HandicapCalculator.swift in Sources */,
 				A10000012345678900000009 /* StatisticsService.swift in Sources */,
 				A1000001234567890000000B /* GoalsStore.swift in Sources */,
+				A1000001234567890000001F /* ActiveRoundStore.swift in Sources */,
 				A1000001234567890000000D /* DashboardView.swift in Sources */,
 				A1000001234567890000000F /* ProgressRingsView.swift in Sources */,
 				A10000012345678900000011 /* MetricsCardsView.swift in Sources */,
