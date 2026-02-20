@@ -26,7 +26,7 @@ struct RayGolfWidget: Widget {
         }
         .configurationDisplayName("RayGolf Score")
         .description("Quickly log your score as you play each hole.")
-        .supportedFamilies([.accessoryRectangular, .accessoryInline])
+        .supportedFamilies([.accessoryRectangular, .accessoryInline, .systemSmall, .systemMedium])
     }
 }
 
@@ -76,9 +76,57 @@ struct RayGolfWidgetView: View {
             RectangularView(entry: entry)
         case .accessoryInline:
             InlineView(entry: entry)
+        case .systemSmall, .systemMedium:
+            SystemWidgetView(entry: entry)
         default:
             Text("RayGolf")
         }
+    }
+}
+
+/// Home Screen widget (systemSmall / systemMedium) — same content as Lock Screen rectangular.
+struct SystemWidgetView: View {
+    var entry: RayGolfEntry
+
+    @ViewBuilder
+    private func scoreLabel(_ score: Int) -> some View {
+        Text("\(score)")
+            .font(.caption)
+            .fontWeight(.semibold)
+            .frame(width: 32, height: 32)
+            .background(Color.green.opacity(0.2))
+            .foregroundStyle(.primary)
+            .clipShape(Circle())
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if entry.currentHole > 0 && entry.currentHole <= (entry.isNineHole ? 9 : 18) {
+                Text("Hole \(entry.currentHole)")
+                    .font(.headline)
+                if !entry.courseName.isEmpty {
+                    Text(entry.courseName)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                HStack(spacing: 6) {
+                    Button(intent: RecordScore1Intent()) { scoreLabel(1) }.buttonStyle(.plain)
+                    Button(intent: RecordScore2Intent()) { scoreLabel(2) }.buttonStyle(.plain)
+                    Button(intent: RecordScore3Intent()) { scoreLabel(3) }.buttonStyle(.plain)
+                    Button(intent: RecordScore4Intent()) { scoreLabel(4) }.buttonStyle(.plain)
+                    Button(intent: RecordScore5Intent()) { scoreLabel(5) }.buttonStyle(.plain)
+                    Button(intent: RecordScore6Intent()) { scoreLabel(6) }.buttonStyle(.plain)
+                    Button(intent: RecordScore7Intent()) { scoreLabel(7) }.buttonStyle(.plain)
+                    Button(intent: RecordScore8Intent()) { scoreLabel(8) }.buttonStyle(.plain)
+                }
+            } else {
+                Text("No active round")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .padding()
     }
 }
 
