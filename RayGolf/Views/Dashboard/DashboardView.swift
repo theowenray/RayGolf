@@ -5,7 +5,6 @@ struct DashboardView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Round.date, order: .reverse) private var rounds: [Round]
     @ObservedObject private var goals = GoalsStore.shared
-    @State private var use18HoleEquivalent = false
     
     private var playProgress: Double {
         let current = StatisticsService.roundsThisWeek(from: rounds)
@@ -43,28 +42,14 @@ struct DashboardView: View {
                     }
                     .padding(.vertical, 8)
                     
-                    // Score mode toggle
-                    HStack {
-                        Text("Scores")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                        Picker("", selection: $use18HoleEquivalent) {
-                            Text("9 Holes").tag(false)
-                            Text("18 Holes").tag(true)
-                        }
-                        .pickerStyle(.segmented)
-                        .frame(width: 200)
-                    }
-                    
                     // Metrics
                     MetricsCardsView(
-                        scoringAverage: StatisticsService.scoringAverage(from: rounds, count: 5, use18HoleEquivalent: use18HoleEquivalent),
-                        bestRound: StatisticsService.bestRoundLast90Days(from: rounds, use18HoleEquivalent: use18HoleEquivalent)
+                        scoringAverage: StatisticsService.scoringAverage(from: rounds, count: 5),
+                        bestRound: StatisticsService.bestRoundLast90Days(from: rounds)
                     )
                     
                     // Trend chart
-                    TrendChartView(rounds: rounds, use18HoleEquivalent: use18HoleEquivalent)
+                    TrendChartView(rounds: rounds)
                     
                     // Streak
                     StreakView(weeksPlayedInRow: StatisticsService.weeksPlayedInRow(from: rounds))

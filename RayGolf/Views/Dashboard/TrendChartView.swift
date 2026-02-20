@@ -3,7 +3,6 @@ import SwiftData
 
 struct TrendChartView: View {
     let rounds: [Round]
-    let use18HoleEquivalent: Bool
     @State private var showHandicap = false
     
     private var sortedRounds: [Round] {
@@ -20,11 +19,8 @@ struct TrendChartView: View {
                 return (r.date, h)
             }
         } else {
-            // Score mode: use 9-hole or 18-hole equivalent based on toggle.
-            return sorted.map {
-                let value = use18HoleEquivalent ? Double($0.effectiveScore) : $0.nineHoleEquivalentScore
-                return (date: $0.date, value: value)
-            }
+            // Score mode: always use 9-hole equivalent.
+            return sorted.map { (date: $0.date, value: $0.nineHoleEquivalentScore) }
         }
     }
     
@@ -114,6 +110,6 @@ struct SimpleLineChart: View {
 }
 
 #Preview {
-    TrendChartView(rounds: [], use18HoleEquivalent: false)
+    TrendChartView(rounds: [])
         .padding()
 }

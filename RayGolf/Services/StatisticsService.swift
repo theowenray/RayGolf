@@ -14,34 +14,20 @@ struct StatisticsService {
         return rounds.filter { $0.date >= thirtyDaysAgo }.count
     }
     
-    /// Scoring average of last N rounds.
-    /// - Parameter use18HoleEquivalent: when true, normalizes to 18 holes; when false, normalizes to 9 holes.
-    static func scoringAverage(from rounds: [Round], count: Int = 5, use18HoleEquivalent: Bool = false) -> Double? {
+    /// Scoring average of last N rounds, normalized to 9 holes.
+    static func scoringAverage(from rounds: [Round], count: Int = 5) -> Double? {
         let sorted = rounds.sorted { $0.date > $1.date }
-        let recent: [Double]
-        if use18HoleEquivalent {
-            recent = Array(sorted.prefix(count)).map { Double($0.effectiveScore) }
-        } else {
-            recent = Array(sorted.prefix(count)).map { $0.nineHoleEquivalentScore }
-        }
+        let recent = Array(sorted.prefix(count)).map { $0.nineHoleEquivalentScore }
         guard !recent.isEmpty else { return nil }
         return recent.reduce(0, +) / Double(recent.count)
     }
     
-    /// Best round in last 90 days.
-    /// - Parameter use18HoleEquivalent: when true, normalizes to 18 holes; when false, normalizes to 9 holes.
-    static func bestRoundLast90Days(from rounds: [Round], use18HoleEquivalent: Bool = false) -> Int? {
+    /// Best round in last 90 days, normalized to 9 holes.
+    static func bestRoundLast90Days(from rounds: [Round]) -> Int? {
         let ninetyDaysAgo = Calendar.current.date(byAdding: .day, value: -90, to: Date()) ?? Date()
-        let recent: [Double]
-        if use18HoleEquivalent {
-            recent = rounds
-                .filter { $0.date >= ninetyDaysAgo }
-                .map { Double($0.effectiveScore) }
-        } else {
-            recent = rounds
-                .filter { $0.date >= ninetyDaysAgo }
-                .map { $0.nineHoleEquivalentScore }
-        }
+        let recent = rounds
+            .filter { $0.date >= ninetyDaysAgo }
+            .map { $0.nineHoleEquivalentScore }
         guard let minValue = recent.min() else { return nil }
         return Int(minValue.rounded())
     }
