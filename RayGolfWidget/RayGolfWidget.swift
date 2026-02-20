@@ -3,6 +3,7 @@
 //  RayGolfWidget
 //
 
+import AppIntents
 import WidgetKit
 import SwiftUI
 
@@ -84,6 +85,17 @@ struct RayGolfWidgetView: View {
 struct RectangularView: View {
     var entry: RayGolfEntry
 
+    @ViewBuilder
+    private func scoreLabel(_ score: Int) -> some View {
+        Text("\(score)")
+            .font(.caption)
+            .fontWeight(.semibold)
+            .frame(width: 28, height: 28)
+            .background(Color.green.opacity(0.2))
+            .foregroundStyle(.primary)
+            .clipShape(Circle())
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             if entry.currentHole > 0 && entry.currentHole <= (entry.isNineHole ? 9 : 18) {
@@ -96,18 +108,14 @@ struct RectangularView: View {
                 }
 
                 HStack(spacing: 4) {
-                    ForEach(1...8, id: \.self) { score in
-                        Button(intent: RecordScoreIntent(score: IntentParameter(score))) {
-                            Text("\(score)")
-                                .font(.caption)
-                                .fontWeight(.semibold)
-                                .frame(width: 28, height: 28)
-                                .background(Color.green.opacity(0.2))
-                                .foregroundStyle(.primary)
-                                .clipShape(Circle())
-                        }
-                        .buttonStyle(.plain)
-                    }
+                    Button(intent: RecordScore1Intent()) { scoreLabel(1) }.buttonStyle(.plain)
+                    Button(intent: RecordScore2Intent()) { scoreLabel(2) }.buttonStyle(.plain)
+                    Button(intent: RecordScore3Intent()) { scoreLabel(3) }.buttonStyle(.plain)
+                    Button(intent: RecordScore4Intent()) { scoreLabel(4) }.buttonStyle(.plain)
+                    Button(intent: RecordScore5Intent()) { scoreLabel(5) }.buttonStyle(.plain)
+                    Button(intent: RecordScore6Intent()) { scoreLabel(6) }.buttonStyle(.plain)
+                    Button(intent: RecordScore7Intent()) { scoreLabel(7) }.buttonStyle(.plain)
+                    Button(intent: RecordScore8Intent()) { scoreLabel(8) }.buttonStyle(.plain)
                 }
             } else {
                 Text("No active round")
