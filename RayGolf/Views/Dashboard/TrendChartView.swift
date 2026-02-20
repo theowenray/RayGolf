@@ -19,7 +19,8 @@ struct TrendChartView: View {
                 return (r.date, h)
             }
         } else {
-            return sorted.map { (date: $0.date, value: Double($0.effectiveScore)) }
+            // Show the actual score shot for that round (9- or 18-hole), not 18-hole equivalent.
+            return sorted.map { (date: $0.date, value: Double($0.totalScore)) }
         }
     }
     

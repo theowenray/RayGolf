@@ -14,18 +14,18 @@ struct StatisticsService {
         return rounds.filter { $0.date >= thirtyDaysAgo }.count
     }
     
-    /// Scoring average of last N rounds (effective scores)
+    /// Scoring average of last N rounds (raw total scores: 9- or 18-hole as played)
     static func scoringAverage(from rounds: [Round], count: Int = 5) -> Double? {
         let sorted = rounds.sorted { $0.date > $1.date }
-        let recent = Array(sorted.prefix(count)).map(\.effectiveScore)
+        let recent = Array(sorted.prefix(count)).map(\.totalScore)
         guard !recent.isEmpty else { return nil }
         return Double(recent.reduce(0, +)) / Double(recent.count)
     }
     
-    /// Best round (lowest score) in last 90 days
+    /// Best round (lowest raw total score) in last 90 days
     static func bestRoundLast90Days(from rounds: [Round]) -> Int? {
         let ninetyDaysAgo = Calendar.current.date(byAdding: .day, value: -90, to: Date()) ?? Date()
-        let recent = rounds.filter { $0.date >= ninetyDaysAgo }.map(\.effectiveScore)
+        let recent = rounds.filter { $0.date >= ninetyDaysAgo }.map(\.totalScore)
         return recent.min()
     }
     
@@ -80,10 +80,18 @@ struct StatisticsService {
         return Double(first.reduce(0, +)) / Double(first.count)
     }
     
+    /// Internal: scoring average using effective scores (18-hole equivalent for 9-hole rounds)
+    private static func effectiveScoringAverage(from rounds: [Round], count: Int = 5) -> Double? {
+        let sorted = rounds.sorted { $0.date > $1.date }
+        let recent = Array(sorted.prefix(count)).map(\.effectiveScore)
+        guard !recent.isEmpty else { return nil }
+        return Double(recent.reduce(0, +)) / Double(recent.count)
+    }
+    
     /// Improve ring fill: clamp((baseline - last5) / 10, 0...1)
     static func improveRingProgress(from rounds: [Round]) -> Double {
         guard let baseline = baselineAverage(from: rounds),
-              let last5 = scoringAverage(from: rounds, count: 5) else { return 0 }
+              let last5 = effectiveScoringAverage(from: rounds, count: 5) else { return 0 }
         let improvement = baseline - last5
         return min(max(improvement / 10, 0), 1)
     }
