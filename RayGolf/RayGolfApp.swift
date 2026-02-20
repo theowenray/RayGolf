@@ -16,7 +16,19 @@ struct RayGolfApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    // Check if there's a completed round from widget
+                    checkForCompletedRound()
+                }
         }
         .modelContainer(sharedModelContainer)
+    }
+    
+    private func checkForCompletedRound() {
+        let store = ActiveRoundStore.shared
+        if store.isComplete {
+            // Round was completed via widget, will be saved when user opens app
+            // We'll handle this in RoundsListView
+        }
     }
 }
