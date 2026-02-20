@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 /// Manages the current round in progress (for Lock Screen widget).
 /// Stored in UserDefaults with App Group support for widget access.
